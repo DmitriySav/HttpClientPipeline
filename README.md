@@ -30,3 +30,14 @@ Interceptor example:
 
             return response;
         }
+
+
+
+Registration example: 
+
+            builder.Services.AddScoped(sp => new HttpPipelineClient(sp, sp.GetService<HttpPipeline>())
+            {
+                BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+            });
+            builder.Services.AddScoped<HttpPipeline>();
+            builder.Services.AddScoped<IRequestMiddleware, AuthInterceptor>();
